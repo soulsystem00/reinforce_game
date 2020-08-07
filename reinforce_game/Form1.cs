@@ -16,14 +16,14 @@ namespace reinforce_game
         {
             InitializeComponent();
             txt_level.Text = "0";
-            txt_rate.Text = cal_rate(Convert.ToInt32(txt_level.Text)).ToString();
-            
+            txt_rate.Text = Convert.ToString(Convert.ToDouble(10000) / 100);
+
         }
         public int reinforce(int level)
         {
             Random random = new Random();
-            int rate = cal_rate(level);
-            int result = random.Next(0, 101);
+            double rate = cal_rate(level);
+            int result = random.Next(0, 10001);
 
             if(result <= rate)
             {
@@ -37,13 +37,13 @@ namespace reinforce_game
         }
         public int cal_rate(int level)
         {
-            int rate = -10 * (level) + 100;
+            int rate = Convert.ToInt32(100*100 * Math.Exp(-1 * Convert.ToDouble(level) / 10));
             return rate;
         }
 
         public void set_rate(int level)
         {
-            txt_rate.Text = cal_rate(level).ToString();
+            txt_rate.Text =Convert.ToString(Convert.ToDouble(cal_rate(level)) / 100);
         }
         private void btn_reinforce_Click(object sender, EventArgs e)
         {
